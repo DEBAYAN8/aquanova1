@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vajra · National Weather Big Data Analytics Platform</title>
+    <meta
+      name="description"
+      content="Vajra is a national weather intelligence platform for India — ingesting IMD, citizen, API and social signals, verifying them with AI, and visualizing risk in real time."
+    />
+    <link rel="icon" type="image/png" href="assets/vajra-icon.png" />
+    <meta property="og:title" content="Vajra · National Weather Big Data Analytics" />
+    <meta property="og:description" content="National weather intelligence for India. SIH 2026 · SIH26069 · MoES / IMD." />
+    <meta property="og:image" content="assets/vajra-og.png" />
+    <meta name="theme-color" content="#050816" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <nav class="nav">
+      <a class="brand" href="#top">
+        <img class="mark-img" src="assets/vajra-icon.png" alt="Vajra" />
+        VAJRA
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#mission">Mission</a>
+        <a href="#layers">Live map</a>
+        <a href="#platform">Platform</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#access">Get access</a>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
+        <a class="nav-cta" href="#access">Request demo</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <canvas id="windCanvas"></canvas>
+      <div id="globe" aria-hidden="true"></div>
+      <div id="stormFlash"></div>
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">SIH 2026 · SIH26069 · MoES / IMD</div>
+          <h1>Weather intelligence<br /><span>at national scale.</span></h1>
+          <p class="lede">
+            Vajra is a National Weather Big Data Analytics platform that collects, verifies and visualizes
+            real-time weather signals across India — from IMD feeds, public APIs, #IMD social posts and
+            citizen reports — so disaster desks can act before the storm lands.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#layers">Watch live layers</a>
+            <a class="btn btn-ghost" href="#dashboard">Open command dashboard</a>
+          </div>
+          <div class="meta-row">
+            <div><strong data-count="28">0</strong> states &amp; UTs covered</div>
+            <div><strong data-count="12">0</strong> source classes ingested</div>
+            <div><strong>&lt; 90s</strong> signal-to-dashboard latency</div>
+          </div>
+        </div>
+        <div class="stage">
+          <article class="weather-card" aria-label="Sample weather intelligence card">
+            <div class="card-hero">
+              <svg class="bolts" viewBox="0 0 390 250" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M220 0 L180 90 L230 90 L150 250" stroke="rgba(255,255,255,.75)" stroke-width="2" fill="none"/>
+                <path d="M80 20 L110 70 L70 70 L120 160" stroke="rgba(210,180,255,.45)" stroke-width="1.5" fill="none"/>
+                <path d="M320 10 L290 80 L330 80 L250 200" stroke="rgba(255,255,255,.35)" stroke-width="1.4" fill="none"/>
+              </svg>
+              <div class="loc" id="cardLoc">📍 Bhubaneswar, Odisha.</div>
+              <div class="temp" id="cardTemp">28<sup>°</sup></div>
+              <div class="cond" id="cardCond">Thunder Storm</div>
+            </div>
+            <div class="days">
+              <button class="day" type="button">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/><path d="M6 13a5 5 0 019.5-2A4 4 0 0118 19H7a4 4 0 01-1-7.9"/></svg>
+                FRI
+              </button>
+              <button class="day" type="button">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="8" r="3"/><path d="M7 16h10a3.5 3.5 0 00-.2-7 5 5 0 00-9.3 1.5"/></svg>
+                SAT
+              </button>
+              <button class="day active" type="button">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 14a5 5 0 019.5-2A4 4 0 0118 20H8"/><path d="M11 12l-2 5h3l-1.5 4"/></svg>
+                SUN
+              </button>
+              <button class="day" type="button">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 16a4.5 4.5 0 119 0H7z"/><path d="M9 19v2M12 19v2M15 19v2"/></svg>
+                MON
+              </button>
+              <button class="day" type="button">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 16a5 5 0 019.6-2A4 4 0 0118 20H7"/></svg>
+                TUE
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </header>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span><span class="dot">●</span> #IMD Puri cyclonic circulation verified</span>
+        <span><span class="dot">●</span> Citizen flood photo · Guwahati · 26.14N 91.73E</span>
+        <span><span class="dot">●</span> Heatwave cluster · Rajasthan · confidence 0.93</span>
+        <span><span class="dot">●</span> Duplicate thunderstorm thread suppressed · Chennai</span>
+        <span><span class="dot">●</span> Wave height anomaly · Bay of Bengal</span>
+        <span><span class="dot">●</span> #IMD Puri cyclonic circulation verified</span>
+        <span><span class="dot">●</span> Citizen flood photo · Guwahati · 26.14N 91.73E</span>
+        <span><span class="dot">●</span> Heatwave cluster · Rajasthan · confidence 0.93</span>
+        <span><span class="dot">●</span> Duplicate thunderstorm thread suppressed · Chennai</span>
+        <span><span class="dot">●</span> Wave height anomaly · Bay of Bengal</span>
+      </div>
+    </div>
+
+    <section id="mission">
+      <p class="section-kicker">Built for the nation</p>
+      <h2>A single source of weather truth for India.</h2>
+      <p class="sub">
+        Problem statement SIH26069 from the Ministry of Earth Sciences and India Meteorological Department
+        asks for a scalable platform that harvests weather intelligence from the open internet, stores it
+        centrally, and gives analysts a live, filterable command view. Vajra is that operating system —
+        designed for IMD, state disaster rooms, researchers and citizens.
+      </p>
+      <div class="grid-3">
+        <article class="card">
+          <div class="icon">📡</div>
+          <h3>Collect everything that moves</h3>
+          <p>APIs, public datasets, websites, #IMD and weather hashtags, photos, videos, GPS and citizen ground truth — ingested as a continuous stream.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🧠</div>
+          <h3>Trust only what verifies</h3>
+          <p>AI flags fake or misleading posts, drops duplicates, scores source reliability and auto-tags rainfall, flood, heatwave, fog, dust storm and wind events.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🗺️</div>
+          <h3>See India, second by second</h3>
+          <p>Windy-class animated layers, date / event / location filters, verification status and a national admin panel for disaster analytics.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="layers" id="layers">
+      <div class="layer-bar">
+        <div>
+          <b>Vajra Live Atmosphere</b>
+          <div style="color:var(--muted);font-size:13px">Motion layers inspired by operational weather maps. Toggle Wind, Waves, Rain, Heat and Storm.</div>
+        </div>
+        <div class="chips">
+          <button class="chip active" data-layer="wind">Wind</button>
+          <button class="chip" data-layer="waves">Waves</button>
+          <button class="chip" data-layer="rain">Rain</button>
+          <button class="chip" data-layer="temp">Heat</button>
+          <button class="chip" data-layer="storm">Storm</button>
+        </div>
+      </div>
+      <div class="layer-stage">
+
+    <div id="weatherMap"></div>
+
+    <canvas id="layerCanvas"></canvas>
+
+    <div class="layer-legend">
+        <span>Calm</span>
+        <div class="swatch"></div>
+        <span>Severe</span>
+    </div>
+
+</div>
+    </div>
+
+    <section id="platform">
+      <p class="section-kicker">Platform</p>
+      <h2>From raw internet noise to a verified weather event.</h2>
+      <p class="sub">Open-source big data building blocks, tuned for Indian monsoon, cyclone and heatwave realities.</p>
+      <div class="pipeline">
+        <div class="step"><b>01 Ingest</b>Kafka / NiFi style collectors for APIs, crawlers, social firehose and citizen app.</div>
+        <div class="step"><b>02 Enrich</b>Time, city, state, GPS, media hash, language and hashtag metadata.</div>
+        <div class="step"><b>03 Verify</b>LLM + CV models detect fakes, duplicates and untrusted sources.</div>
+        <div class="step"><b>04 Classify</b>Rain, thunder, flood, heat, fog, dust, wind — with confidence scores.</div>
+        <div class="step"><b>05 Visualize</b>National lakehouse + real-time dashboard and admin workflows.</div>
+      </div>
+      <div class="grid-4" style="margin-top:22px">
+        <article class="card"><h3>Social intelligence</h3><p>Auto-harvest posts tagged #IMD, #Monsoon, #Cyclone and regional scripts, with photo/video evidence.</p></article>
+        <article class="card"><h3>Official feeds</h3><p>IMD, CWC, INCOIS, AWS/ARG networks and open meteorological APIs in one schema.</p></article>
+        <article class="card"><h3>Citizen ground truth</h3><p>Geo-tagged reports from the public, ranked by proximity to sensors and historical reliability.</p></article>
+        <article class="card"><h3>Admin control</h3><p>Role-based access for IMD analysts, state SDMA desks and research tenants.</p></article>
+      </div>
+    </section>
+
+    <section id="dashboard">
+      <p class="section-kicker">Command dashboard</p>
+      <h2>Filter the country the way an analyst thinks.</h2>
+      <p class="sub">Date-wise, event-wise, location-wise and verification-status tracking — exactly as specified in the SIH problem statement.</p>
+      <div class="dash">
+        <aside class="filters">
+          <label>Date</label>
+          <input type="date" value="2026-09-22" />
+          <label>Event</label>
+          <select id="eventFilter">
+            <option value="all">All events</option>
+            <option value="flood">Flooding</option>
+            <option value="heat">Heatwave</option>
+            <option value="thunder">Thunderstorm</option>
+            <option value="cyclone">Cyclone</option>
+            <option value="dust">Dust storm</option>
+            <option value="wind">Strong winds</option>
+          </select>
+          <label>Location</label>
+          <input id="locFilter" placeholder="City or state" />
+          <label>Verification</label>
+          <select id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="verified">Verified</option>
+            <option value="review">Review</option>
+            <option value="pending">Pending</option>
+            <option value="duplicate">Duplicate</option>
+          </select>
+        </aside>
+        <div id="feed" class="feed"></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="section-kicker">Who it serves</p>
+      <h2>One platform, four front doors.</h2>
+      <div class="audiences">
+        <article class="card"><h3>IMD &amp; MoES</h3><p>National situational awareness, source verification and a defensible archive of weather events.</p></article>
+        <article class="card"><h3>Disaster rooms</h3><p>NDMA / SDMA desks get live risk layers, evidence packs and location filters for deployment.</p></article>
+        <article class="card"><h3>Citizens</h3><p>Simple report form, local alerts and a public weather card — not just an analyst console.</p></article>
+        <article class="card"><h3>Researchers</h3><p>Open APIs and a curated lakehouse for monsoon, cyclone and climate impact studies.</p></article>
+      </div>
+    </section>
+
+    <div class="cta-band" id="access">
+      <div>
+        <p class="section-kicker">For agencies</p>
+        <h2>Request operational access.</h2>
+        <p class="sub">Built for IMD, state disaster authorities and Smart India Hackathon evaluators. We’ll provision a demo tenant with sample India-wide streams.</p>
+        <form id="accessForm">
+          <input name="org" required placeholder="Organisation (e.g. IMD / SDMA)" />
+          <input name="email" type="email" required placeholder="Official email" style="margin-top:10px" />
+          <select name="role" style="margin-top:10px">
+            <option>Analyst</option>
+            <option>Administrator</option>
+            <option>Researcher</option>
+            <option>Hackathon evaluator</option>
+          </select>
+          <button class="btn btn-primary" type="submit">Get a demo tenant</button>
+        </form>
+      </div>
+      <div>
+        <p class="section-kicker">For citizens</p>
+        <h2>Report what you see.</h2>
+        <p class="sub">Every geo-tagged report is scored by AI, de-duplicated, and only then shown on the national map.</p>
+        <form id="citizenForm">
+          <input name="city" required placeholder="City / GPS area" />
+          <select name="event" style="margin-top:10px">
+            <option>Rainfall</option>
+            <option>Thunderstorm</option>
+            <option>Flooding</option>
+            <option>Heatwave</option>
+            <option>Fog</option>
+            <option>Dust storm</option>
+            <option>Strong winds</option>
+          </select>
+          <textarea name="note" rows="3" placeholder="What is happening right now?" style="margin-top:10px"></textarea>
+          <button class="btn btn-ghost" type="submit">Submit citizen report</button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot">
+        <div>
+          <strong style="color:#fff">VAJRA</strong>
+          <p>National Weather Big Data Analytics Platform · Team project for Smart India Hackathon 2026.</p>
+        </div>
+        <div>Problem SIH26069 · Ministry of Earth Sciences · India Meteorological Department · Disaster Management</div>
+      </div>
+    </footer>
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="js/windfield.js"></script>
+    <script src="js/globe.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
